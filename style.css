@@ -59,48 +59,79 @@ body {
 .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(4px);
+    filter: blur(80px);
+    /* Massive blur for ambient glow */
     animation: float 16s ease-in-out infinite;
+    opacity: 0.8;
 }
 
 .orb-one {
-    width: 35vw;
-    min-width: 220px;
+    width: 45vw;
+    min-width: 300px;
     aspect-ratio: 1;
-    top: -10%;
-    left: -8%;
-    background: radial-gradient(circle at 30% 30%, rgba(123, 196, 255, 0.55), rgba(65, 102, 250, 0.05));
+    top: -15%;
+    left: -10%;
+    background: radial-gradient(circle at 50% 50%, rgba(123, 196, 255, 0.8), rgba(65, 102, 250, 0));
 }
 
 .orb-two {
-    width: 30vw;
-    min-width: 180px;
+    width: 40vw;
+    min-width: 250px;
     aspect-ratio: 1;
     right: -10%;
-    bottom: 18%;
-    background: radial-gradient(circle at 60% 40%, rgba(153, 111, 255, 0.42), rgba(121, 86, 241, 0.05));
+    bottom: 5%;
+    background: radial-gradient(circle at 50% 50%, rgba(153, 111, 255, 0.7), rgba(121, 86, 241, 0));
     animation-duration: 20s;
 }
 
 .orb-three {
-    width: 22vw;
-    min-width: 150px;
+    width: 35vw;
+    min-width: 200px;
     aspect-ratio: 1;
-    left: 45%;
-    bottom: -12%;
-    background: radial-gradient(circle at 50% 45%, rgba(87, 213, 255, 0.36), rgba(87, 213, 255, 0.02));
+    left: 30%;
+    bottom: -15%;
+    background: radial-gradient(circle at 50% 50%, rgba(87, 213, 255, 0.65), rgba(0, 162, 255, 0));
     animation-duration: 22s;
 }
 
 .grid-lines {
     position: absolute;
     inset: 0;
-    background-image: linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-    background-size: 58px 58px;
-    opacity: 0.35;
-    transform: perspective(700px) rotateX(55deg) translateY(35%);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.6;
+    transform: perspective(700px) rotateX(60deg) translateY(0);
     transform-origin: bottom;
+    animation: gridSlide 10s linear infinite;
+}
+
+@keyframes gridSlide {
+    0% {
+        transform: perspective(700px) rotateX(60deg) translateY(0);
+    }
+
+    100% {
+        transform: perspective(700px) rotateX(60deg) translateY(60px);
+    }
+}
+
+#webgl-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    animation: fade-in-canvas 2s 1s ease forwards;
+}
+
+@keyframes fade-in-canvas {
+    to {
+        opacity: 1;
+    }
 }
 
 .container {
@@ -330,6 +361,7 @@ h1 {
         opacity: 0;
         transform: translateY(24px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -341,6 +373,7 @@ h1 {
         opacity: 0;
         transform: rotateX(8deg) translateY(18px);
     }
+
     to {
         opacity: 1;
         transform: rotateX(3deg) translateY(0);
@@ -348,10 +381,12 @@ h1 {
 }
 
 @keyframes wave-tilt {
+
     0%,
     100% {
         transform: rotateY(0deg) rotateZ(0.2deg);
     }
+
     50% {
         transform: rotateY(7deg) rotateZ(-0.2deg);
     }
@@ -364,10 +399,12 @@ h1 {
 }
 
 @keyframes float {
+
     0%,
     100% {
         transform: translateY(0) translateX(0);
     }
+
     50% {
         transform: translateY(16px) translateX(10px);
     }
@@ -393,6 +430,7 @@ h1 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
